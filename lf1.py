@@ -18,7 +18,7 @@ def lambda_handler(event, context):
     logger.debug(photo_name)
 
 
-    #Analyze the image.
+    #Analyze the image
     response = rek_client.detect_labels(
         Image={
             'S3Object': {
