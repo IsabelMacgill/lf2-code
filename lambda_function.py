@@ -56,7 +56,7 @@ def get_slots_search(response):
         logger.debug('return res1 entered')
         return res1
 
-    #If two search terms are defi
+    #If two search terms are defined
     q2 = {'size': 10000, 'query': {'multi_match': {'query': search_term_2}}}
 
     client2 = OpenSearch(hosts=[{
