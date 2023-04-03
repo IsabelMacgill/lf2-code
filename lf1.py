@@ -5,6 +5,7 @@ from botocore.exceptions import ClientError
 from opensearchpy import OpenSearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
 import random 
+import os
 
 host = os.environ['open_search']
 logger = logging.getLogger()
@@ -60,7 +61,6 @@ def lambda_handler(event, context):
         'labels': json_labels
     }
 
-    host = 'search-photos-ir3dxedsasv6ddlx7gj7efuqn4.us-east-1.es.amazonaws.com' 
     region = 'us-east-1' 
     
     service = 'es'
@@ -85,7 +85,7 @@ def lambda_handler(event, context):
           }
         }
         response = open_search.indices.create(index_name, body=index_body)
-        logger.debug(reponse)
+        logger.debug(response)
     
     logger.debug(openSearch_json)
     index_response = open_search.index(index = 'photo-labels', body = openSearch_json, id = photo_name, refresh = True)
