@@ -11,6 +11,8 @@ from requests_aws4auth import AWS4Auth
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
+LEXID = os.environ['lexbot_id']
+LEXALIASID = os.environ['lexbot_aliasid']
 REGION = 'us-east-1'
 HOST = os.environ['open_search']
 BUCKET = os.environ['photos_bucket']
@@ -143,8 +145,8 @@ def lambda_handler(event, context):
         # return res
         
     response = client.recognize_text(
-        botId='RDV2J4EXJW',
-        botAliasId='TSTALIASID',
+        botId=LEXID,
+        botAliasId=LEXALIASID,
         localeId='en_US',
         sessionId= '123',
         text= searching)
