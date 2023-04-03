@@ -12,7 +12,8 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 REGION = 'us-east-1'
-HOST = 'search-photos-ir3dxedsasv6ddlx7gj7efuqn4.us-east-1.es.amazonaws.com'
+HOST = os.environ['open_search']
+BUCKET = os.environ['photos_bucket']
 INDEX = 'photo-labels'
 
 ## -- Get Slots & Search -- 
@@ -112,7 +113,7 @@ def get_urls(items_in):
         
         url = boto3.client('s3').generate_presigned_url(
         ClientMethod='get_object', 
-        Params={'Bucket': 'photos-a2-cloud', 'Key': key},
+        Params={'Bucket': BUCKET, 'Key': key},
         ExpiresIn=3600)
         
         
