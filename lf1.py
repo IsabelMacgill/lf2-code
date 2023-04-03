@@ -6,6 +6,7 @@ from opensearchpy import OpenSearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
 import random 
 
+host = os.environ['open_search']
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 rek_client = boto3.client('rekognition')
@@ -74,15 +75,17 @@ def lambda_handler(event, context):
         connection_class = RequestsHttpConnection
     )
     
-    # index_name = 'photo-labels'
-    # index_body = {
-    #   'settings': {
-    #     'index': {
-    #       'number_of_shards': 1
-    #     }
-    #   }
-    # }
-    # response = open_search.indices.create(index_name, body=index_body)
+    if not open_search.indices.exists(index='photo-labels'):
+        index_name = 'photo-labels'
+        index_body = {
+          'settings': {
+            'index': {
+              'number_of_shards': 1
+            }
+          }
+        }
+        response = open_search.indices.create(index_name, body=index_body)
+        logger.debug(reponse)
     
     logger.debug(openSearch_json)
     index_response = open_search.index(index = 'photo-labels', body = openSearch_json, id = photo_name, refresh = True)
