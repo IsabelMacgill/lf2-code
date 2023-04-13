@@ -12,6 +12,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 rek_client = boto3.client('rekognition')
 s3_client = boto3.client('s3')
+#test123
 
 def lambda_handler(event, context):
     logger.debug(event)
